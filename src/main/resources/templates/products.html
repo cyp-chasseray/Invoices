@@ -17,7 +17,7 @@
     <tr th:each="product : ${products}">
         <td><span th:text="${product.id}"></span></td>
         <td><span th:text="${product.name}"></span></td>
-        <td><span th:text="${product.price}"></span></td>
+        <td><span th:text="${product.price}"></span><span>0€</span></td>
         <td><span th:text="${product.description}"></span></td>
     </tr>
 </table>

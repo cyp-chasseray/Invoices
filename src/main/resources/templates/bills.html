@@ -13,9 +13,8 @@
         <th>Payment Limit Date</th>
         <th>Payment Method</th>
         <th>Client</th>
-        <th>Product Name</th>
-        <th>Product Price</th>
         <th>Total</th>
+        <th>Articles</th>
     </tr>
 
     <tr th:each="bill : ${bills}" class="bill">
@@ -24,13 +23,11 @@
         <td><span th:text="${bill.paymentLimitDate}"></span></td>
         <td><span th:text="${bill.paymentMethod}"></span></td>
         <td><span th:text="${bill.client.getName()}"></span></td>
+        <td><span th:text="${bill.getTotal()}"></span><span>0€</span></td>
         <td th:each="product : ${bill.getProducts()}">
             <span th:text="${product.getName()}"></span><br>
+            <span th:text="${product.getPrice()}"></span><span>0€</span><br>
         </td>
-        <td th:each="product : ${bill.getProducts()}">
-            <span th:text="${product.getPrice()}"></span><br>
-        </td>
-        <td><span>Total: </span><span th:text="${bill.getTotal()}"></span>€</td>
     </tr>
 </table>
 
@@ -51,14 +48,41 @@
             </select>
         </div>
         <div>
+            <button type="button" onclick="addProduct()">Add Product</button>
+        </div>
+        <div>
+            <label for="selectedProducts">Selected Products:</label>
+            <select id="selectedProducts" name="selectedProductIds" multiple></select>
+        </div>
+        <div>
             <label for="paymentMethod">Payment Method:</label>
-            <input type="text" id="paymentMethod" name="paymentMethod">
+            <select id="paymentMethod" name="paymentMethod">
+                <option value="CREDIT_CARD">Credit Card</option>
+                <option value="WIRE">Wire Transfer</option>
+                <option value="CASH">Cash</option>
+            </select>
         </div>
         <div>
             <button type="submit">Create Bill</button>
         </div>
     </form>
 </div>
+
+<script>
+    function addProduct() {
+        var productsSelect = document.getElementById("products");
+        var selectedProductsSelect = document.getElementById("selectedProducts");
+        var selectedOptions = Array.from(productsSelect.selectedOptions);
+
+        selectedOptions.forEach(function(option) {
+            var newOption = document.createElement("option");
+            newOption.value = option.value;
+            newOption.text = option.text;
+            selectedProductsSelect.add(newOption);
+        });
+    }
+</script>
+
 
 <style>
     table {

@@ -10,7 +10,7 @@
         <li><a th:href="@{/products}" class="nav-link px-2 text-dark">Products</a></li>
         <li><a th:href="@{/clients}" class="nav-link px-2 text-dark">Clients</a></li>
         <li><a th:href="@{/bills}" class="nav-link px-2 text-dark">Bills</a></li>
-        <li class="nav-item"><a class="nav-link" aria-current="page" href="javascript: logoutForm.submit()">logout</a></li>
+        <li class="nav-item"><a class="nav-link" aria-current="page" href="javascript: logoutForm.submit()">Logout</a></li>
         <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
             <input value="logout"/>
         </form>
