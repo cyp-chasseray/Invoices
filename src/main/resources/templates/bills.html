@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- Add your head content here -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
 <th:block th:include="./nav.html"></th:block>
@@ -23,10 +23,10 @@
         <td><span th:text="${bill.paymentLimitDate}"></span></td>
         <td><span th:text="${bill.paymentMethod}"></span></td>
         <td><span th:text="${bill.client.getName()}"></span></td>
-        <td><span th:text="${bill.getTotal()}"></span><span>0€</span></td>
+        <td><span th:text="${bill.getTotal()}"></span><span>€</span></td>
         <td th:each="product : ${bill.getProducts()}">
             <span th:text="${product.getName()}"></span><br>
-            <span th:text="${product.getPrice()}"></span><span>0€</span><br>
+            <span th:text="${product.getPrice()}"></span><span>€</span><br>
         </td>
     </tr>
 </table>
@@ -82,20 +82,5 @@
         });
     }
 </script>
-
-
-<style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 10px;
-    }
-
-    th, td {
-        padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-</style>
 </body>
 </html>

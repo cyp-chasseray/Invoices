@@ -16,13 +16,12 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-    public List<Client> fetchAllClients() {
-        return clientRepository.findAll();
+
+    public List<Client> fetchAllByUserId(long id) {
+        return clientRepository.findAllByUserId(id);
     }
 
-    public Client createClient(Client client) {
-        return clientRepository.save(client);
-    }
+    public void createClient(Client client) {clientRepository.save(client);}
 
     public Client fetchById(long id) {return clientRepository.getClientById(id);}
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- Add your head content here -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
 <th:block th:include="./nav.html"></th:block>
@@ -17,7 +17,7 @@
     <tr th:each="product : ${products}">
         <td><span th:text="${product.id}"></span></td>
         <td><span th:text="${product.name}"></span></td>
-        <td><span th:text="${product.price}"></span><span>0€</span></td>
+        <td><span th:text="${product.price}"></span><span>€</span></td>
         <td><span th:text="${product.description}"></span></td>
     </tr>
 </table>
@@ -44,18 +44,5 @@
     </form>
 </div>
 
-<style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 10px;
-    }
-
-    th, td {
-        padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-</style>
 </body>
 </html>

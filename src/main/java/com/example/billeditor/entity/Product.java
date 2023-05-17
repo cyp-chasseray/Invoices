@@ -18,6 +18,10 @@ public class Product {
     @Column(name = "price")
     private double price;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Long getId() {
         return id;
     }
@@ -58,5 +62,28 @@ public class Product {
         this.name = name;
         this.description = description;
         this.price = price;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Product(Long id, String name, String description, double price, User user) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.user = user;
+    }
+
+    public Product(String name, String description, double price, User user) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.user = user;
     }
 }

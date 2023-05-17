@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- Add your head content here -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
 <th:block th:include="./nav.html"></th:block>
@@ -43,6 +43,10 @@
             <input type="text" id="street" name="street">
         </div>
         <div>
+            <label for="zipcode">Zipcode:</label>
+            <input type="text" id="zipcode" name="zipcode">
+        </div>
+        <div>
             <label for="city">City:</label>
             <input type="text" id="city" name="city">
         </div>
@@ -56,18 +60,5 @@
     </form>
 </div>
 
-<style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 10px;
-    }
-
-    th, td {
-        padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-</style>
 </body>
 </html>

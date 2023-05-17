@@ -31,6 +31,10 @@ public class Bill {
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> products;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Long getId() {
         return id;
     }
@@ -95,6 +99,33 @@ public class Bill {
         return this.getProducts().stream()
                 .mapToDouble(Product::getPrice)
                 .sum();
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Bill(Long id, LocalDateTime date, LocalDateTime paymentLimitDate, PaymentMethod paymentMethod, Client client, List<Product> products, User user) {
+        this.id = id;
+        this.date = date;
+        this.paymentLimitDate = paymentLimitDate;
+        this.paymentMethod = paymentMethod;
+        this.client = client;
+        this.products = products;
+        this.user = user;
+    }
+
+    public Bill(LocalDateTime date, LocalDateTime paymentLimitDate, PaymentMethod paymentMethod, Client client, List<Product> products, User user) {
+        this.date = date;
+        this.paymentLimitDate = paymentLimitDate;
+        this.paymentMethod = paymentMethod;
+        this.client = client;
+        this.products = products;
+        this.user = user;
     }
 }
 

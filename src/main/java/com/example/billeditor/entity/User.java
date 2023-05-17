@@ -24,6 +24,7 @@ public class User implements UserDetails {
     )
     public List<Role> rolelist;
 
+
     public User() {
     }
 

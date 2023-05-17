@@ -27,6 +27,10 @@ public class Client {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Long getId() {
         return id;
     }
@@ -102,5 +106,34 @@ public class Client {
         this.zipcode = zipcode;
         this.city = city;
         this.phoneNumber = phoneNumber;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Client(Long id, String name, String companyName, String street, String zipcode, String city, String phoneNumber, User user) {
+        this.id = id;
+        this.name = name;
+        this.companyName = companyName;
+        this.street = street;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.phoneNumber = phoneNumber;
+        this.user = user;
+    }
+
+    public Client(String name, String companyName, String street, String zipcode, String city, String phoneNumber, User user) {
+        this.name = name;
+        this.companyName = companyName;
+        this.street = street;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.phoneNumber = phoneNumber;
+        this.user = user;
     }
 }

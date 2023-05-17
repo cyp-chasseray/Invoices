@@ -1,6 +1,9 @@
 package com.example.billeditor.security;
 
 import com.example.billeditor.service.UserDetailsServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -10,13 +13,18 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
 public class SecSecurityConfig {
+    public static final String[] ENDPOINTS_WHITELIST = {
+            "/css/**"
+    };
 
     @Bean
     UserDetailsService customUserDetailsService() {
@@ -40,16 +48,18 @@ public class SecSecurityConfig {
         return http
                 .authorizeHttpRequests(requests -> {
                     requests
+                            .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
                             .requestMatchers("/").permitAll()
                             .anyRequest().authenticated();
                 })
                 .formLogin(form -> {
                     form
-                            .loginPage("/login")               // Indique que je souhaite utilser mon propre thymeleaf
-                            .usernameParameter("email")       // <input name="email">
-                            .passwordParameter("password")    // <input name="password">
+                            .loginPage("/login")
+                            .usernameParameter("email")
+                            .passwordParameter("password")
                             .permitAll()
-                            .defaultSuccessUrl("/profile");
+                            .defaultSuccessUrl("/profile")
+                            .successHandler(new CustomAuthenticationSuccessHandler());
                 })
                 .logout(logout -> {
                     logout
@@ -58,5 +68,16 @@ public class SecSecurityConfig {
                             .logoutSuccessUrl("/login");
                 })
                 .build();
+    }
+    private static class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+        @Override
+        public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+                                            org.springframework.security.core.Authentication authentication)
+                throws IOException {
+            HttpSession session = request.getSession();
+            String email = authentication.getName();
+            session.setAttribute("email", email);
+            response.sendRedirect(request.getContextPath() + "/profile");
+        }
     }
 }

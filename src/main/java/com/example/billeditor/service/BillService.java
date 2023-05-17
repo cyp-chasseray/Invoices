@@ -16,11 +16,9 @@ public class BillService {
         this.billRepository = billRepository;
     }
 
-    public List<Bill> fetchAllBills() {
-        return billRepository.findAll();
-    }
-
     public Bill createBill(Bill bill) {
         return billRepository.save(bill);
     }
+
+    public List<Bill> fetchAllByUserId(long id) {return billRepository.findAllByUserId(id);}
 }
