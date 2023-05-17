@@ -1,0 +1,20 @@
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<header class="p-3 text-bg-light">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <a href="#" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+<!--        <img th:src="@{/images/contactosaurus-vert.png}" alt="My Image" width="200px">-->
+      </a>
+      <ul class="nav col-12 col-lg-auto me-lg mb-2 justify-content-end mb-md-0 ms-auto">
+        <li><a th:href="@{/profile}" class="nav-link px-2 text-dark">Profile</a></li>
+        <li><a th:href="@{/products}" class="nav-link px-2 text-dark">Products</a></li>
+        <li><a th:href="@{/clients}" class="nav-link px-2 text-dark">Clients</a></li>
+        <li><a th:href="@{/bills}" class="nav-link px-2 text-dark">Bills</a></li>
+        <li class="nav-item"><a class="nav-link" aria-current="page" href="javascript: logoutForm.submit()">logout</a></li>
+        <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+            <input value="logout"/>
+        </form>
+        </ul>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Add your head content here -->
+</head>
+<body>
+<th:block th:include="./nav.html"></th:block>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Company Name</th>
+        <th>Street</th>
+        <th>City</th>
+        <th>Phone Number</th>
+    </tr>
+
+    <tr th:each="client : ${clients}">
+        <td><span th:text="${client.id}"></span></td>
+        <td><span th:text="${client.name}"></span></td>
+        <td><span th:text="${client.companyName}"></span></td>
+        <td><span th:text="${client.street}"></span></td>
+        <td><span th:text="${client.city}"></span></td>
+        <td><span th:text="${client.phoneNumber}"></span></td>
+    </tr>
+</table>
+
+<h3>Add new client</h3>
+
+<div>
+    <form th:action="@{/new-client}" method="post">
+        <div>
+            <label for="clientName">Client Name:</label>
+            <input type="text" id="clientName" name="name">
+        </div>
+        <div>
+            <label for="companyName">Company Name:</label>
+            <input type="text" id="companyName" name="companyName">
+        </div>
+        <div>
+            <label for="street">Street:</label>
+            <input type="text" id="street" name="street">
+        </div>
+        <div>
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city">
+        </div>
+        <div>
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber">
+        </div>
+        <div>
+            <button type="submit">Create Client</button>
+        </div>
+    </form>
+</div>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 10px;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+</style>
+</body>
+</html>

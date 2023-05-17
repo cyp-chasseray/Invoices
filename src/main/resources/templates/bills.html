@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Add your head content here -->
+</head>
+<body>
+<th:block th:include="./nav.html"></th:block>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Payment Limit Date</th>
+        <th>Payment Method</th>
+        <th>Client</th>
+        <th>Product Name</th>
+        <th>Product Price</th>
+        <th>Total</th>
+    </tr>
+
+    <tr th:each="bill : ${bills}" class="bill">
+        <td><span th:text="${bill.id}"></span></td>
+        <td><span th:text="${bill.date}"></span></td>
+        <td><span th:text="${bill.paymentLimitDate}"></span></td>
+        <td><span th:text="${bill.paymentMethod}"></span></td>
+        <td><span th:text="${bill.client.getName()}"></span></td>
+        <td th:each="product : ${bill.getProducts()}">
+            <span th:text="${product.getName()}"></span><br>
+        </td>
+        <td th:each="product : ${bill.getProducts()}">
+            <span th:text="${product.getPrice()}"></span><br>
+        </td>
+        <td><span>Total: </span><span th:text="${bill.getTotal()}"></span>€</td>
+    </tr>
+</table>
+
+<h3>Add new bill</h3>
+
+<div>
+    <form th:action="@{/new-bill}" method="post">
+        <div>
+            <label for="client">Client:</label>
+            <select id="client" name="clientId">
+                <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.name}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="products">Products:</label>
+            <select id="products" name="productIds" multiple>
+                <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="paymentMethod">Payment Method:</label>
+            <input type="text" id="paymentMethod" name="paymentMethod">
+        </div>
+        <div>
+            <button type="submit">Create Bill</button>
+        </div>
+    </form>
+</div>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 10px;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+</style>
+</body>
+</html>

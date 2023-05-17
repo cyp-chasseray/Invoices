@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<th:block th:include="./nav.html"></th:block>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Welcome to Invoiciraptor</h1>
+
+<h5>Your email:</h5>
+<p><span th:text="${user.email}"></span></p>
+<h5>Your userId:</h5>
+<p><span th:text="${user.id}"></span></p>
+</body>
+</html>
